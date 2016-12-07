@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.synoa</groupId>
+		<artifactId>genisys</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<groupId>de.synoa.genisys</groupId>
+	<artifactId>getting-started</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>getting-started</name>
+
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<spring.boot.version>1.4.2.RELEASE</spring.boot.version>
+		<camel.version>2.18.1</camel.version>
+		<cxf.version>3.1.8</cxf.version>
+		<commons.lang.version>3.4</commons.lang.version>
+		<spotify.docker.plugin.version>0.4.13</spotify.docker.plugin.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Manage Spring-Boot and Camel BOM -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-spring-boot-dependencies</artifactId>
+				<version>${camel.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<!-- Spring-boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Camel -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+		</dependency>
+
+		<!-- Dependencies for Tests -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<!-- Allows the routes to be run via 'mvn spring-boot:run' -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>de.synoa.genisys.gettingstarted.App</mainClass>
+				</configuration>
+			</plugin>
+
+			<!-- Build the Docker Image -->
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${spotify.docker.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<imageName>synoa/${project.artifactId}${image.prefix}</imageName>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+						<imageTag>latest</imageTag>
+					</imageTags>
+					<baseImage>openjdk:8-jre-alpine</baseImage>
+					<!-- copy the service's jar file from target into the root directory 
+						of the image -->
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${basedir}</directory>
+							<include>${genisys.configuration}</include>
+						</resource>
+					</resources>
+					<!-- rename the properties file so spring can find it -->
+					<runs>
+						<run>mv ${genisys.configuration} application.properties</run>
+					</runs>
+					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<profiles>
+
+		<profile>
+			<id>docker-dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<genisys.configuration>application.properties</genisys.configuration>
+				<image.prefix>-dev</image.prefix>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>docker-stage</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<genisys.configuration>staging.properties</genisys.configuration>
+				<image.prefix>-stage</image.prefix>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>docker-prod</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<genisys.configuration>production.properties</genisys.configuration>
+				<image.prefix>-prod</image.prefix>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>
