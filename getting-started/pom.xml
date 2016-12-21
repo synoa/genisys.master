@@ -121,7 +121,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>synoa/${project.groupId}.${project.artifactId}${image.prefix}</imageName>
+					<imageName>synoa/${project.groupId}.${project.artifactId}${image.postfix}</imageName>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
 						<imageTag>latest</imageTag>
@@ -161,7 +161,7 @@
 			</activation>
 			<properties>
 				<genisys.configuration>application.properties</genisys.configuration>
-				<image.prefix>-dev</image.prefix>
+				<image.postfix>-dev</image.postfix>
 			</properties>
 		</profile>
 
@@ -172,7 +172,7 @@
 			</activation>
 			<properties>
 				<genisys.configuration>staging.properties</genisys.configuration>
-				<image.prefix>-stage</image.prefix>
+				<image.postfix>-stage</image.postfix>
 			</properties>
 		</profile>
 
@@ -183,7 +183,7 @@
 			</activation>
 			<properties>
 				<genisys.configuration>production.properties</genisys.configuration>
-				<image.prefix>-prod</image.prefix>
+				<image.postfix>-prod</image.postfix>
 			</properties>
 		</profile>
 	</profiles>
