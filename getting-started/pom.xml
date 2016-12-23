@@ -21,8 +21,6 @@
 	<properties>
 		<spring.boot.version>1.4.2.RELEASE</spring.boot.version>
 		<camel.version>2.18.1</camel.version>
-		<cxf.version>3.1.8</cxf.version>
-		<commons.lang.version>3.4</commons.lang.version>
 	</properties>
 
 	<dependencyManagement>
