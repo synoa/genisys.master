@@ -121,7 +121,8 @@
 					<imageName>synoa/${project.groupId}.${project.artifactId}${image.postfix}</imageName>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
-						<imageTag>latest</imageTag>
+						<!-- Uncomment the following line if you want the image to be tagged as latest -->
+						<!-- <imageTag>latest</imageTag> -->
 					</imageTags>
 					<baseImage>openjdk:8-jre-alpine</baseImage>
 					<!-- copy the service's jar file from target into the root directory
