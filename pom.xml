@@ -7,7 +7,7 @@
 	<artifactId>genisys</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<name>Genisys</name>
+	<name>Genisys Parent</name>
 	<description>Parent of all Microservices</description>
 
 	<modules>
