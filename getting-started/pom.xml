@@ -102,6 +102,7 @@
 				</executions>
 				<configuration>
 					<mainClass>de.synoa.genisys.gettingstarted.App</mainClass>
+					<arguments>--spring.config.location=${basedir}/../${genisys.configuration}</arguments>
 				</configuration>
 			</plugin>
 
@@ -135,7 +136,7 @@
 						</resource>
 						<resource>
 							<targetPath>/</targetPath>
-							<directory>${basedir}</directory>
+							<directory>${basedir}/..</directory>
 							<include>${genisys.configuration}</include>
 						</resource>
 					</resources>
@@ -158,7 +159,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<genisys.configuration>application.properties</genisys.configuration>
+				<genisys.configuration>development.properties</genisys.configuration>
 				<image.postfix>-dev</image.postfix>
 			</properties>
 		</profile>

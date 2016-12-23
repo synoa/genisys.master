@@ -9,13 +9,5 @@
         <include>**/*.java</include>
       </includes>
     </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
-      <directory></directory>
-      <includes>
-        <include>application.properties</include>
-        <include>staging.properties</include>
-        <include>production.properties</include>
-      </includes>
-    </fileSet>
   </fileSets>
 </archetype-descriptor>
