@@ -17,8 +17,8 @@
 	<url>https://synoa.de/</url>
 
 	<properties>
-		<spring.boot.version>1.4.2.RELEASE</spring.boot.version>
-		<camel.version>2.18.1</camel.version>
+		<spring.boot.version>${spring_boot_version}</spring.boot.version>
+		<camel.version>${camel_version}</camel.version>
 	</properties>
 
 	<dependencyManagement>
