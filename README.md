@@ -2,6 +2,12 @@
 
 ## Create a super nice Project 😎
 
+First execute: 
+
+```
+mvn clean install
+```
+
 Open a Terminal and execute:
 
 ```
