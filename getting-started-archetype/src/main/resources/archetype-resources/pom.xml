@@ -55,16 +55,24 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
-		<!-- Camel -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
+
+		<!-- Camel -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+        </dependency>
 
 		<!-- Dependencies for Tests -->
 		<dependency>
@@ -100,7 +108,7 @@
 				</executions>
 				<configuration>
 					<mainClass>${package}.App</mainClass>
-					<arguments>--spring.config.location=${basedir}/../${genisys.configuration}</arguments>
+					<arguments>--spring.config.location=${basedir}/${genisys.configuration}</arguments>
 				</configuration>
 			</plugin>
 
@@ -135,7 +143,7 @@
 						</resource>
 						<resource>
 							<targetPath>/</targetPath>
-							<directory>${basedir}/..</directory>
+							<directory>${basedir}</directory>
 							<include>${genisys.configuration}</include>
 						</resource>
 					</resources>
