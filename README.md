@@ -2,11 +2,7 @@
 
 ## Create a super nice Project 😎
 
-First execute: 
-
-```
-mvn clean install
-```
+First execute `mvn clean install` in root of this project 🤡: 
 
 Open a Terminal and execute:
 
