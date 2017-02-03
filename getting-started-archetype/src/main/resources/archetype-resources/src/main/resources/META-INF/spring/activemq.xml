@@ -11,7 +11,7 @@
             <bean class="org.apache.activemq.ActiveMQConnectionFactory">
                 <property name="brokerURL" value="${activemq.url}" />
                 <property name="clientID"
-                    value="de.synoa.genisys.connexus.import" />
+                    value="${activemq.clientID}" />
             </bean>
         </property>
     </bean>

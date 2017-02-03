@@ -14,7 +14,11 @@ public class GettingStartedRouteBuilder extends RouteBuilder {
         // @formatter:off
 		
 		from("timer:helloworld?period=5000").routeId("Hello World Route")
-			.log("{{genisys.greeting}}");
+		    .setBody(simple("{{genisys.greeting}}"))
+			.to("activemq:{{activemq.queue.prefix}}talk");
+		
+		from("activemq:{{activemq.queue.prefix}}talk").routeId("Talk Route")
+		    .log("${body}");
 		
         // @formatter:on
     }
