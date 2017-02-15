@@ -53,7 +53,10 @@
 		<!-- Spring-boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+        <!-- Comment this if you need an embedded Tomcat -->
+			<artifactId>spring-boot-starter</artifactId>
+        <!-- Uncomment this if you need an embedded Tomcat -->
+        <!-- <artifactId>spring-boot-starter-web</artifactId> -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -108,7 +111,7 @@
 				</executions>
 				<configuration>
 					<mainClass>${package}.App</mainClass>
-					<arguments>--spring.config.location=${basedir}/${genisys.configuration}</arguments>
+					<arguments>--spring.config.location=${basedir}/development.properties</arguments>
 				</configuration>
 			</plugin>
 
@@ -126,7 +129,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>synoa/${project.groupId}.${project.artifactId}${image.postfix}</imageName>
+					<imageName>synoa/${project.groupId}.${project.artifactId}</imageName>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
 						<!-- Uncomment the following line if you want the image to be tagged as latest -->
@@ -141,57 +144,12 @@
 							<directory>${project.build.directory}</directory>
 							<include>${project.build.finalName}.jar</include>
 						</resource>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${basedir}</directory>
-							<include>${genisys.configuration}</include>
-						</resource>
 					</resources>
-					<!-- rename the properties file so spring can find it -->
-					<runs>
-						<run>mv ${genisys.configuration} application.properties</run>
-					</runs>
 					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
 				</configuration>
 			</plugin>
 
 		</plugins>
 	</build>
-
-	<profiles>
-
-		<profile>
-			<id>docker-dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<genisys.configuration>development.properties</genisys.configuration>
-				<image.postfix>-dev</image.postfix>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>docker-stage</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<genisys.configuration>staging.properties</genisys.configuration>
-				<image.postfix>-stage</image.postfix>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>docker-prod</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<genisys.configuration>production.properties</genisys.configuration>
-				<image.postfix>-prod</image.postfix>
-			</properties>
-		</profile>
-	</profiles>
 
 </project>

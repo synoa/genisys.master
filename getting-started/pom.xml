@@ -1,7 +1,5 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -20,7 +18,7 @@
 
 	<properties>
 		<spring.boot.version>1.4.2.RELEASE</spring.boot.version>
-		<camel.version>2.18.1</camel.version>
+		<camel.version>2.18.2</camel.version>
 	</properties>
 
 	<dependencyManagement>
@@ -55,18 +53,29 @@
 		<!-- Spring-boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+        <!-- Comment this if you need an embedded Tomcat -->
+			<artifactId>spring-boot-starter</artifactId>
+        <!-- Uncomment this if you need an embedded Tomcat -->
+        <!-- <artifactId>spring-boot-starter-web</artifactId> -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
 
 		<!-- Camel -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+        </dependency>
 
 		<!-- Dependencies for Tests -->
 		<dependency>
@@ -101,8 +110,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>de.synoa.genisys.gettingstarted.App</mainClass>
-					<arguments>--spring.config.location=${basedir}/../${genisys.configuration}</arguments>
+					<mainClass>de.synoa.genisys.getting.started.App</mainClass>
+					<arguments>--spring.config.location=${basedir}/development.properties</arguments>
 				</configuration>
 			</plugin>
 
@@ -120,7 +129,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>synoa/${project.groupId}.${project.artifactId}${image.postfix}</imageName>
+					<imageName>synoa/${project.groupId}.${project.artifactId}</imageName>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
 						<!-- Uncomment the following line if you want the image to be tagged as latest -->
@@ -135,57 +144,12 @@
 							<directory>${project.build.directory}</directory>
 							<include>${project.build.finalName}.jar</include>
 						</resource>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${basedir}/..</directory>
-							<include>${genisys.configuration}</include>
-						</resource>
 					</resources>
-					<!-- rename the properties file so spring can find it -->
-					<runs>
-						<run>mv ${genisys.configuration} application.properties</run>
-					</runs>
 					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
 				</configuration>
 			</plugin>
 
 		</plugins>
 	</build>
-
-	<profiles>
-
-		<profile>
-			<id>docker-dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<genisys.configuration>development.properties</genisys.configuration>
-				<image.postfix>-dev</image.postfix>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>docker-stage</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<genisys.configuration>staging.properties</genisys.configuration>
-				<image.postfix>-stage</image.postfix>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>docker-prod</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<genisys.configuration>production.properties</genisys.configuration>
-				<image.postfix>-prod</image.postfix>
-			</properties>
-		</profile>
-	</profiles>
 
 </project>
