@@ -13,7 +13,7 @@
 	<modules>
 		<module>getting-started</module>
 		<module>getting-started-archetype</module>
-  </modules>
+	</modules>
 
 	<properties>
 		<maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
