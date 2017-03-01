@@ -18,6 +18,8 @@ public class GettingStartedRouteBuilder extends RouteBuilder {
 			.to("activemq:{{activemq.queue.prefix}}talk");
 		
 		from("activemq:{{activemq.queue.prefix}}talk").routeId("Talk Route")
+		    .log("${body}")
+		    .to("mongodb:mongoBean?database={{mongodb.database}}&operation=getDbStats")
 		    .log("${body}");
 		
         // @formatter:on
