@@ -129,6 +129,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<serverId>docker-registry</serverId>
 					<imageName>synoa/${project.groupId}.${project.artifactId}</imageName>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
