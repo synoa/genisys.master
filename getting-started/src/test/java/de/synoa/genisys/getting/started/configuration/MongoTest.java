@@ -1,6 +1,6 @@
 package de.synoa.genisys.getting.started.configuration;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class MongoTest {
     @Test
     public void test_createMongoClient() {
         MongoClient mongoClient = underTest.createMongoClient("localhost", 27017, null, null, null);
-        assertNull(mongoClient);
+        assertNotNull(mongoClient);
     }
 
 }
