@@ -14,7 +14,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 
 @Configuration
-public class Mongo {
+public class MongoDB {
 
     @Bean(name = "mongoBean")
     public MongoClient createMongoClient(@Value("${mongodb.host}") String host, @Value("${mongodb.port}") int port,
