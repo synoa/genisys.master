@@ -12,4 +12,4 @@ Change the Directory to your Microservice Living Space and execute 🤖:
 ```
 mvn archetype:generate -DarchetypeGroupId=de.synoa.genisys -DarchetypeArtifactId=getting-started-archetype
 ```
-You should see a new Directory with the Name of your Microservice. Switch to this Directory and execute `mvn clean spring-boot:run` and see your new offspring greeting you 🙋🏼.
+You should see a new Directory with the Name of your Microservice. Switch to this Directory and execute `mvn clean spring-boot:run` and see your new offspring greeting you 🙋🏼🤦🏽‍♂️.
