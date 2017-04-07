@@ -1,4 +1,7 @@
-package de.synoa.genisys.getting.started.configuration;
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.configurations;
 
 import java.util.Collections;
 
@@ -11,7 +14,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 
 @Configuration
-public class MongoConfiguration {
+public class Mongo {
 
     @Bean(name = "mongoBean")
     public MongoClient createMongoClient(@Value("${mongodb.host}") String host, @Value("${mongodb.port}") int port,

@@ -14,8 +14,18 @@ import org.springframework.context.annotation.Configuration;
 import ${package}.App;
 
 @Configuration
-public class ActiveMQConfiguration {
+public class ActiveMQ {
 
+    private static final String QUEUE_BASE = "activemq:{{activemq.queue.prefix}}.";
+
+    private static final String TOPIC_BASE = "activemq:topic:{{activemq.queue.prefix}}.";
+    
+    // TODO CHANGE ME!!
+    public static final String NICE_QUEUE = QUEUE_BASE + "nice.queue";
+    
+    // TODO CHANGE ME!!
+    public static final String SUPER_TOPIC = TOPIC_BASE + "super.topic";
+    
     @Bean(name = "pooledConnectionFactory", initMethod = "start", destroyMethod = "stop")
     public PooledConnectionFactory createActiveMQConnectionPool(@Value("${activemq.url}") String brokerURL) {
 
@@ -24,7 +34,8 @@ public class ActiveMQConfiguration {
 
         PooledConnectionFactory connectionPool = new PooledConnectionFactory(connectionFactory);
         connectionPool.setMaxConnections(1);
-
+        connectionPool.setReconnectOnException(true);
+        
         return connectionPool;
     }
 

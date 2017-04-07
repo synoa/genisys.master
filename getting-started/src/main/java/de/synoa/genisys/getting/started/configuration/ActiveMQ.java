@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import de.synoa.genisys.getting.started.App;
 
 @Configuration
-public class ActiveMQConfiguration {
+public class ActiveMQ {
 
     @Bean(name = "pooledConnectionFactory", initMethod = "start", destroyMethod = "stop")
     public PooledConnectionFactory createActiveMQConnectionPool(@Value("${activemq.url}") String brokerURL) {
@@ -21,6 +21,7 @@ public class ActiveMQConfiguration {
 
         PooledConnectionFactory connectionPool = new PooledConnectionFactory(connectionFactory);
         connectionPool.setMaxConnections(1);
+        connectionPool.setReconnectOnException(true);
 
         return connectionPool;
     }
