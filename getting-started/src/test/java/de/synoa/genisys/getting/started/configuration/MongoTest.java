@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import com.mongodb.MongoClient;
 
+/**
+ * Super Test!
+ */
 public class MongoTest {
 
     MongoDB underTest;
