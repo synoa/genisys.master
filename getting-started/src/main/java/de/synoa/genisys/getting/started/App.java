@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 public class App {
 
     public static void main(String[] args) {
+        // start the application
         SpringApplication.run(App.class, args);
     }
 
