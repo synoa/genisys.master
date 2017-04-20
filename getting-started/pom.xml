@@ -130,7 +130,7 @@
 				</executions>
 				<configuration>
 					<serverId>docker-registry</serverId>
-					<imageName>synoa/${project.groupId}.${project.artifactId}</imageName>
+					<imageName>localhost:5000/${project.groupId}.${project.artifactId}</imageName>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
 						<!-- Uncomment the following line if you want the image to be tagged as latest -->
