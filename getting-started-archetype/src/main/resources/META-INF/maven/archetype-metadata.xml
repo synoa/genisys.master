@@ -4,10 +4,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <requiredProperties>
     <requiredProperty key="spring_boot_version">
-      <defaultValue>1.4.2.RELEASE</defaultValue>
+      <defaultValue>1.5.0.RELEASE</defaultValue>
     </requiredProperty>
     <requiredProperty key="camel_version">
-      <defaultValue>2.18.3</defaultValue>
+      <defaultValue>2.19.0</defaultValue>
     </requiredProperty>
   </requiredProperties>
   <fileSets>
