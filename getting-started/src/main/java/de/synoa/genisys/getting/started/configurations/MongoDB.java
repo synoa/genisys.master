@@ -1,4 +1,4 @@
-package de.synoa.genisys.getting.started.configuration;
+package de.synoa.genisys.getting.started.configurations;
 
 import java.util.Collections;
 
