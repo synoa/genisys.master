@@ -7,7 +7,7 @@
       <defaultValue>1.4.2.RELEASE</defaultValue>
     </requiredProperty>
     <requiredProperty key="camel_version">
-      <defaultValue>2.18.3</defaultValue>
+      <defaultValue>2.18.4</defaultValue>
     </requiredProperty>
   </requiredProperties>
   <fileSets>
