@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.synoa</groupId>
 		<artifactId>genisys</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 
 	<groupId>${groupId}</groupId>
@@ -110,6 +110,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<finalName>${project.artifactId}</finalName>
 					<mainClass>${package}.App</mainClass>
 					<arguments>--spring.config.location=${basedir}/development.properties</arguments>
 				</configuration>
@@ -118,35 +119,19 @@
 			<!-- Build the Docker Image -->
 			<plugin>
 				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>build-image</id>
-						<phase>package</phase>
+						<id>default</id>
 						<goals>
 							<goal>build</goal>
 						</goals>
+						<configuration>
+							<repository>synoa/${project.groupId}.${project.artifactId}</repository>
+							<tag>${project.version}</tag>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<imageName>synoa/${project.groupId}.${project.artifactId}</imageName>
-					<imageTags>
-						<imageTag>${project.version}</imageTag>
-						<!-- Uncomment the following line if you want the image to be tagged as latest -->
-						<!-- <imageTag>latest</imageTag> -->
-					</imageTags>
-					<baseImage>openjdk:8-jre-alpine</baseImage>
-					<!-- copy the service's jar file from target into the root directory
-						of the image -->
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
-					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
-				</configuration>
 			</plugin>
 
 		</plugins>
