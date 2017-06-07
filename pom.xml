@@ -13,7 +13,6 @@
 	<modules>
 		<module>getting-started</module>
 		<module>getting-started-archetype</module>
-		<module>test</module>
 	</modules>
 
 	<properties>
