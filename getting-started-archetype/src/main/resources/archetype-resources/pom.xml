@@ -112,7 +112,8 @@
 				<configuration>
 					<finalName>${project.artifactId}</finalName>
 					<mainClass>${package}.App</mainClass>
-					<arguments>--spring.config.location=${basedir}/development.properties</arguments>
+					<!-- Uncomment if you want to replace the application.properties -->
+					<!--<arguments>&#45;&#45;spring.config.location=${basedir}/development.properties</arguments>-->
 				</configuration>
 			</plugin>
 
