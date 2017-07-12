@@ -6,3 +6,4 @@ ENV JAVA_OPTS="-Xms64m -Xmx128m"
 ENTRYPOINT exec /usr/bin/java $JAVA_OPTS -jar /getting-started.jar
 
 ADD target/getting-started.jar /
+ADD application.properties /

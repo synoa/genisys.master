@@ -23,3 +23,11 @@ services:
         ports:
             - "27017:27017"
         command: '--storageEngine wiredTiger'
+
+
+#    gettingStarted:
+#      container_name: synoa_gettingstarted
+#      image: synoa/de.synoa.genisys.getting-started:1.0-SNAPSHOT
+#      links:
+#        - activemq
+#        - mongodb

@@ -114,6 +114,7 @@
                     <finalName>${project.artifactId}</finalName>
                     <mainClass>${package}.App</mainClass>
                     <!-- Uncomment if you want to replace the application.properties -->
+                    <!-- You also have to update the Dockerfile if you add your own *.properties -->
                     <!--<arguments>&#45;&#45;spring.config.location=${basedir}/development.properties</arguments>-->
                 </configuration>
             </plugin>

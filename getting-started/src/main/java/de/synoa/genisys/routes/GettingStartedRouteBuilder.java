@@ -1,4 +1,4 @@
-package de.synoa.genisys.getting.started.routes;
+package de.synoa.genisys.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;

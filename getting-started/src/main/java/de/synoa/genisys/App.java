@@ -1,4 +1,4 @@
-package de.synoa.genisys.getting.started;
+package de.synoa.genisys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
