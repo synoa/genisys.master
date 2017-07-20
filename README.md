@@ -1,3 +1,7 @@
+# Deprecated
+
+Use https://github.com/synoa/genisys.archetype instead. 
+
 # genisys.master
 
 ## First Steps 👶🏽
